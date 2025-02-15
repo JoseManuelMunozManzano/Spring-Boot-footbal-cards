@@ -29,7 +29,7 @@
 			"response": []
 		},
 		{
-			"name": "Player por Nombre",
+			"name": "Player por Id",
 			"request": {
 				"auth": {
 					"type": "noauth"
@@ -37,7 +37,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/players/Kilyam%20MBAPPÉ",
+					"raw": "http://localhost:8080/players/325636",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -45,7 +45,53 @@
 					"port": "8080",
 					"path": [
 						"players",
-						"Kilyam%20MBAPPÉ"
+						"325636"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Player por Id Exception",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/players/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"players",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar Player por Id",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/players/325636",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"players",
+						"325636"
 					]
 				}
 			},
@@ -61,7 +107,12 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "Jude Bellingham"
+					"raw": "{\n    \"id\": \"325636\",\n    \"jerseyNumber\": 11,\n    \"name\": \"Alexia PUTELLAS\",\n    \"position\": \"Midfielder\",\n    \"dateOfBirth\": \"1994-02-04\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
 				},
 				"url": {
 					"raw": "http://localhost:8080/players",
@@ -78,30 +129,38 @@
 			"response": []
 		},
 		{
-			"name": "Eliminar Player por Nombre",
+			"name": "Crear Player Exception",
 			"request": {
 				"auth": {
 					"type": "noauth"
 				},
-				"method": "DELETE",
+				"method": "POST",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": \"325636\",\n    \"jerseyNumber\": 11,\n    \"name\": \"Alexia PUTELLAS\",\n    \"position\": \"Midfielder\",\n    \"dateOfBirth\": \"1994-02-04\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": "http://localhost:8080/players/Jude Bellingham",
+					"raw": "http://localhost:8080/players",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"players",
-						"Jude Bellingham"
+						"players"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "Actualizar Player",
+			"name": "Actualizar Player por Id",
 			"request": {
 				"auth": {
 					"type": "noauth"
@@ -110,7 +169,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "David Alaba",
+					"raw": "{\n    \"id\": \"396930\",\n    \"jerseyNumber\": 21,\n    \"name\": \"Ona BATLLE\",\n    \"position\": \"Defender\",\n    \"dateOfBirth\": \"1999-06-10\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -118,7 +177,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/players/Jude Bellingham",
+					"raw": "http://localhost:8080/players/396930",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -126,7 +185,39 @@
 					"port": "8080",
 					"path": [
 						"players",
-						"Jude Bellingham"
+						"396930"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Actualizar Player por Id Exception",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": \"1\",\n    \"jerseyNumber\": 21,\n    \"name\": \"Ona BATLLE\",\n    \"position\": \"Defender\",\n    \"dateOfBirth\": \"1999-06-10\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/players/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"players",
+						"1"
 					]
 				}
 			},

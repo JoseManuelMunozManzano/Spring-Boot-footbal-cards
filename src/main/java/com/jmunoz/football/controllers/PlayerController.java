@@ -1,5 +1,7 @@
 package com.jmunoz.football.controllers;
 
+import com.jmunoz.football.model.Player;
+import com.jmunoz.football.services.FootballService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -8,28 +10,34 @@ import java.util.List;
 @RequestMapping("/players")
 public class PlayerController {
 
-    @GetMapping
-    public List<String> listPlayers() {
-        return List.of("Kylian MBAPPÉ", "Vinicius JÚNIOR");
+    private FootballService footballService;
+
+    public PlayerController(FootballService footballService) {
+        this.footballService = footballService;
     }
 
-    @GetMapping("/{name}")
-    public String readPlayer(@PathVariable String name) {
-        return name;
+    @GetMapping
+    public List<Player> listPlayers() {
+        return footballService.listPlayers();
+    }
+
+    @GetMapping("/{id}")
+    public Player readPlayer(@PathVariable String id) {
+        return footballService.getPlayer(id);
     }
 
     @PostMapping
-    public String createPlayer(@RequestBody String name) {
-        return "Player " + name + " created";
+    public Player createPlayer(@RequestBody Player player) {
+        return footballService.addPlayer(player);
     }
 
-    @PutMapping("/{name}")
-    public String updatePlayer(@PathVariable String name, @RequestBody String newName) {
-        return "Player " + name + " updated to " + newName;
+    @PutMapping("/{id}")
+    public Player updatePlayer(@PathVariable String id, @RequestBody Player player) {
+        return footballService.updatePlayer(player);
     }
 
-    @DeleteMapping("/{name}")
-    public String deletePlayer(@PathVariable String name) {
-        return "Player " + name + " deleted";
+    @DeleteMapping("/{id}")
+    public void deletePlayer(@PathVariable String id) {
+        footballService.deletePlayer(id);
     }
 }
