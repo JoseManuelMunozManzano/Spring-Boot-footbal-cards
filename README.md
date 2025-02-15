@@ -15,8 +15,11 @@ Uso Spring Initializr: `https://start.spring.io/`
 ## Ejecución del proyecto
 
 - Clonar/descargar el proyecto
-- Ejecutar el comando: `./mvnw spring-boot:run`
+- Ejecutar el proyecto con el comando: `./mvnw spring-boot:run`
   - O ejecutar directamente desde IntelliJ Idea
+- Ejecutar los tests con el comando: `./mvnw test`
+  - O ejecutar directamente desde IntelliJ Idea
+  - O se ejecutan los goals `package` o `install` de Maven, salvo que explícitamente se deshabilite la ejecución de tests
 - En la carpeta `postman` se encuentran los endpoints para probar
 
 
@@ -92,7 +95,7 @@ public ResponseEntity<PLayer> readPlayer(@PathVariable String id) {
     Player player = footballService.getPlayer(id);
     return new ResponseEntity<>(player, HttpStatus.OK);
   } catch (NotFoundException e) {
-    return new ResponseEntity<>(HttpStatus.NOT_FOUND)
+    return new ResponseEntity<>(HttpStatus.NOT_FOUND);
   }
 }
 ```
@@ -111,3 +114,24 @@ public class GlobalExceptionHandler {
 ```
 
 Así podemos tener una gestión de errores consistente para todos nuestros RESTful endpoints en la aplicación.
+
+## Testing un API RESTful
+
+Por defecto Spring Boot incluye Testing starter, que provee los componentes básicos para testing unitario y de integración.
+
+Vamos a crear tests unitarios para nuestra API RESTful.
+
+Creamos en la carpeta `src/test` la carpeta `controllers` y dentro el controlador `PlayerControllerTest.java` y lo anotamos con `@WebMvcTest`.
+
+Concretando:
+
+- @WebMvcTest: se indica a nivel de clase y deshabilita la configuración por defecto de Spring Boot, y solo aplica la configuración relevante para los tests MVC. Esto significa que no se registran clases anotadas con @Service, pero registra clases anotadas con @RestController
+- @MockitoBean: se indica a nivel de campo y permite hacer mocks de implementaciones, reemplazando cualquier registro bean previo
+- given: este método hace un stub (reemplazo de una dependencia real de un sistema por una simulada) y nos permite especificarle un comportamiento
+- MockMvc: simula el comportamiento del web server y nos permite hacer test de los controladores sin tener que hacer deploy de la aplicación
+
+Se ha usado el principio `Arrange-Act-Assert (AAA)` al escribir los tests.
+
+- Arrange: se prepara la clase que se quiere testear, estableciendo las condiciones
+- Act: se realiza la acción que se quiere testear
+- Assert: se verifica que se obtienen los resultados esperados
