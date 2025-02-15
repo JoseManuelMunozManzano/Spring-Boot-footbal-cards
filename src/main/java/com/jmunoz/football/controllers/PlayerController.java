@@ -1,7 +1,10 @@
 package com.jmunoz.football.controllers;
 
+import com.jmunoz.football.exceptions.AlreadyExistsException;
+import com.jmunoz.football.exceptions.NotFoundException;
 import com.jmunoz.football.model.Player;
 import com.jmunoz.football.services.FootballService;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -39,5 +42,16 @@ public class PlayerController {
     @DeleteMapping("/{id}")
     public void deletePlayer(@PathVariable String id) {
         footballService.deletePlayer(id);
+    }
+
+    // Gestión de excepciones
+    @ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "Not found")
+    @ExceptionHandler(NotFoundException.class)
+    public void notFoundHandler() {
+    }
+
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST, reason = "Already exists")
+    @ExceptionHandler(AlreadyExistsException.class)
+    public void alreadyExistsHandler() {
     }
 }

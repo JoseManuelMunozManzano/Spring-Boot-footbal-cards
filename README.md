@@ -68,4 +68,46 @@ Modificamos `PlayerController.java` para usar nuestro service y exponer el nuevo
   - 404 Not found - si se intenta acceder a un recurso que no existe
   - 400 Bad Request - si la petición no es válida
   - 500 Internal Server error - si ocurre una excepción
-  - 401 Unauthorized o 403 Forbidden - relacionados con la seguridad 
+  - 401 Unauthorized o 403 Forbidden - relacionados con la seguridad
+
+## Gestión de errores en un RESTful API
+
+Vamos a gestionar errores comunes (excepciones) y devolver códigos de respuesta consistentes que siguen los estándares.
+
+Modificamos el controlador `PlayerController.java` para gestionar las excepciones.
+
+Si no gestionamos las excepciones, el error devuelto es un Internal Server error (500), que no se adhiere al estándar RESTful API.
+
+Para realizar esta gestión se usan las siguientes anotaciones:
+
+- @ExceptionHandler: para añadir un handler method y gestionar un tipo de excepción específico
+- @ResponseStatus: gestiona el HTTP status code que se devuelve en este method handler específico
+
+Es posible controlar los códigos de respuesta de forma más explícita en el código. En vez de devolver directamente el modelo de datos en el controlador, podemos devolver `ResponseEntity`, que permite especificar el status code explícitamente.
+
+```java
+@GetMapping("/{id}")
+public ResponseEntity<PLayer> readPlayer(@PathVariable String id) {
+  try {
+    Player player = footballService.getPlayer(id);
+    return new ResponseEntity<>(player, HttpStatus.OK);
+  } catch (NotFoundException e) {
+    return new ResponseEntity<>(HttpStatus.NOT_FOUND)
+  }
+}
+```
+
+Otra alternativa es tener un handler global para todos los controladores. Esto se hace con una clase anotada con `@ControllerAdvice` de esta forma:
+
+```java
+@ControllerAdvice
+public class GlobalExceptionHandler {
+
+  @ExceptionHandler(NotFoundException.class)
+  public ResponseEntity<String> handleGlobalException(NotFoundException ex) {
+    return new ResponseEntity<String>(ex.getMessage(), HttpStatus.NOT_FOUND);
+  }
+}
+```
+
+Así podemos tener una gestión de errores consistente para todos nuestros RESTful endpoints en la aplicación.
