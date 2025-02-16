@@ -158,3 +158,7 @@ Para documentar nuestro RESTful API tenemos que seguir los siguientes pasos:
   - Esta ruta devuelve la descripción JSON de nuestro API RESTful en formato OpenAPI
 - Acceder a la siguiente URL en el navegador: `http://localhost:8080/swagger-ui/index.html`
   - Esta ruta ofrece una interfaz para interactuar con nuestra API
+
+## Consumiendo un API RESTful desde otra aplicación Spring Boot usando FeignClient
+
+Ver Proyecto cliente albums: `https://github.com/JoseManuelMunozManzano/Spring-Boot-albums-cards`.
