@@ -21,7 +21,8 @@ Uso Spring Initializr: `https://start.spring.io/`
   - O ejecutar directamente desde IntelliJ Idea
   - O se ejecutan los goals `package` o `install` de Maven, salvo que explícitamente se deshabilite la ejecución de tests
 - En la carpeta `postman` se encuentran los endpoints para probar
-
+- Descripción OpenAPI: `http://localhost:8080/v3/api-docs`
+- Interfaz OpenAPI: `http://localhost:8080/swagger-ui/index.html`
 
 ## Creación de Controller
 
@@ -135,3 +136,25 @@ Se ha usado el principio `Arrange-Act-Assert (AAA)` al escribir los tests.
 - Arrange: se prepara la clase que se quiere testear, estableciendo las condiciones
 - Act: se realiza la acción que se quiere testear
 - Assert: se verifica que se obtienen los resultados esperados
+
+## Uso de OpenAPI para documentar nuestro API RESTful
+
+OpenAPI (antiguo Swagger) es un estándar para documentar APIs RESTful y puede usarse para generar aplicaciones de cliente.
+
+Para documentar nuestro RESTful API tenemos que seguir los siguientes pasos:
+
+- Añadir al archivo `pom.xml` la siguiente dependencia:
+  ```xml
+  <dependencies>
+    <dependency>
+      <groupId>org.springdoc</groupId>
+      <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+      <version>2.3.0</version>
+    </dependency>
+  </dependencies>
+  ```
+  - Esta dependencia examina la aplicación en tiempo de ejecución y genera la descripción de los endpoints disponibles
+- Ejecutar la aplicación y acceder a la siguiente URL en el navegador: `http://localhost:8080/v3/api-docs`
+  - Esta ruta devuelve la descripción JSON de nuestro API RESTful en formato OpenAPI
+- Acceder a la siguiente URL en el navegador: `http://localhost:8080/swagger-ui/index.html`
+  - Esta ruta ofrece una interfaz para interactuar con nuestra API
