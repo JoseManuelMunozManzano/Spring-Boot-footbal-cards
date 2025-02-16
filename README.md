@@ -23,6 +23,9 @@ Uso Spring Initializr: `https://start.spring.io/`
 - En la carpeta `postman` se encuentran los endpoints para probar
 - Descripción OpenAPI: `http://localhost:8080/v3/api-docs`
 - Interfaz OpenAPI: `http://localhost:8080/swagger-ui/index.html`
+- Se puede probar usando un programa cliente
+  - Hecho con FeignClient: `https://github.com/JoseManuelMunozManzano/Spring-Boot-albums-cards`
+  - Hecho con RestClient: `https://github.com/JoseManuelMunozManzano/Spring-Boot-albums-cards-restclient`
 
 ## Creación de Controller
 
@@ -162,3 +165,7 @@ Para documentar nuestro RESTful API tenemos que seguir los siguientes pasos:
 ## Consumiendo un API RESTful desde otra aplicación Spring Boot usando FeignClient
 
 Ver Proyecto cliente albums: `https://github.com/JoseManuelMunozManzano/Spring-Boot-albums-cards`.
+
+## Consumiendo un API RESTful desde otra aplicación Spring Boot usando RestClient
+
+Ver Proyecto cliente albums: `https://github.com/JoseManuelMunozManzano/Spring-Boot-albums-cards-restclient`.
